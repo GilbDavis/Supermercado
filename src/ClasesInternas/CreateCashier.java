@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -25,18 +26,20 @@ public class CreateCashier extends javax.swing.JInternalFrame {
      */
     public CreateCashier() {
         initComponents();
-        setLocation(360, 120);
+        setLocation(200, 50);
+        CargarArticulo();
     }
     
     public void CargarArticulo(){
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) CajeroTablatbl.getModel();
         modelo.setRowCount(0);
-        res = conectar.Conexion.Consulta("select * from tableprueb");
         try{
+            PreparedStatement stmt = ClasesInternas.ConexionAdmin.getConexion().
+                prepareStatement("SELECT idvendedor, nombre, apellido,"
+                        + "cedula, email FROM Vendedor");
+            res = stmt.executeQuery();
             while(res.next()){
-                //Se requiere cambia la coleccion por una mas actualizada para
-                //Evitar futuros errores de codigo o implementacion
-                Vector v = new Vector();
+             Vector v = new Vector();
                 v.add(res.getInt(1));
                 v.add(res.getString(2));
                 v.add(res.getString(3));
@@ -72,11 +75,12 @@ public class CreateCashier extends javax.swing.JInternalFrame {
         Contrasenalbl = new javax.swing.JLabel();
         CajeroCedulatxt = new javax.swing.JTextField();
         CajeroEmailtxt = new javax.swing.JTextField();
-        CajeroContrasenatxt = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         CajeroTablatbl = new javax.swing.JTable();
         CrearCajerobtn = new javax.swing.JButton();
         EliminarCajerobtn = new javax.swing.JButton();
+        CajeroActualizarbtn = new javax.swing.JButton();
+        CajeroContrasenatxt = new javax.swing.JPasswordField();
 
         setClosable(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -110,6 +114,12 @@ public class CreateCashier extends javax.swing.JInternalFrame {
         Contrasenalbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Contrasenalbl.setText("Contraseña");
 
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+        });
+
         CajeroTablatbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -130,10 +140,12 @@ public class CreateCashier extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
+        CajeroTablatbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CajeroTablatblMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(CajeroTablatbl);
-        if (CajeroTablatbl.getColumnModel().getColumnCount() > 0) {
-            CajeroTablatbl.getColumnModel().getColumn(4).setResizable(false);
-        }
 
         CrearCajerobtn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         CrearCajerobtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/an.png"))); // NOI18N
@@ -147,13 +159,27 @@ public class CreateCashier extends javax.swing.JInternalFrame {
         EliminarCajerobtn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         EliminarCajerobtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/del.png"))); // NOI18N
         EliminarCajerobtn.setText("Eliminar");
+        EliminarCajerobtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarCajerobtnActionPerformed(evt);
+            }
+        });
+
+        CajeroActualizarbtn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        CajeroActualizarbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/up.png"))); // NOI18N
+        CajeroActualizarbtn.setText("Actualizar");
+        CajeroActualizarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CajeroActualizarbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(149, 149, 149)
                         .addComponent(Titulolbl))
@@ -170,14 +196,16 @@ public class CreateCashier extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(CajeroIdtxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(CajeroNombretxt)
-                            .addComponent(CajeroApellidotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CajeroCedulatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CajeroEmailtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CajeroContrasenatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(CajeroApellidotxt, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                            .addComponent(CajeroCedulatxt, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                            .addComponent(CajeroEmailtxt, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                            .addComponent(CajeroContrasenatxt)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
+                        .addGap(37, 37, 37)
                         .addComponent(CrearCajerobtn)
                         .addGap(18, 18, 18)
+                        .addComponent(CajeroActualizarbtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addComponent(EliminarCajerobtn)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
@@ -214,15 +242,16 @@ public class CreateCashier extends javax.swing.JInternalFrame {
                                 .addComponent(CajeroEmailtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(Emaillbl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(CajeroContrasenatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Contrasenalbl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(Contrasenalbl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CajeroContrasenatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(69, 69, 69)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(CrearCajerobtn)
-                                .addComponent(EliminarCajerobtn)))
+                                .addComponent(EliminarCajerobtn)
+                                .addComponent(CajeroActualizarbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -300,17 +329,18 @@ public class CreateCashier extends javax.swing.JInternalFrame {
                }catch(SQLException e){
                    e.getMessage();
                }
+               JOptionPane.showMessageDialog(this, "LOS DATOS HAN SIDO GUARDADOS CORRECTAMENTE",
+                    "Informacion", JOptionPane.INFORMATION_MESSAGE);
+               CargarArticulo();
 
-                stmt = ClasesInternas.ConexionCashier.
+                /*stmt = ClasesInternas.ConexionCashier.
                         getConexion().prepareStatement("SELECT * FROM "
                                 + "Vendedor WHERE cedula = ?");
                 res = stmt.executeQuery();
                 if (res.next()) {
                     CajeroIdtxt.setText(res.getString(1));
-                }
-                
-                JOptionPane.showMessageDialog(this, "LOS DATOS HAN SIDO GUARDADOS CORRECTAMENTE",
-                    "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                }*/
+
             }
         }catch(SQLException e){
             e.getMessage();
@@ -318,13 +348,79 @@ public class CreateCashier extends javax.swing.JInternalFrame {
     }
     }//GEN-LAST:event_CrearCajerobtnActionPerformed
 
+    private void CajeroActualizarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CajeroActualizarbtnActionPerformed
+        // TODO add your handling code here:
+        int opc =JOptionPane.showConfirmDialog(this, "¿ESTA SEGURO QUE "
+                + "DESEA MODIFICAR ESTE CAJERO?", "INFO", 
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        if(opc == JOptionPane.YES_OPTION){
+        try{
+            PreparedStatement stmt = ClasesInternas.ConexionCashier.
+                    getConexion().prepareStatement("UPDATE Vendedor SET "
+                            + "nombre = ?, apellido = ?, cedula = ?,"
+                            + "email = ?, pass = ? WHERE idvendedor = ?");
+            stmt.setString(1, CajeroNombretxt.getText());
+            stmt.setString(2, CajeroApellidotxt.getText());
+            stmt.setString(3, CajeroCedulatxt.getText());
+            stmt.setString(4, CajeroEmailtxt.getText());
+            stmt.setString(5, CajeroContrasenatxt.getText());
+            stmt.setInt(6, Integer.parseInt(CajeroIdtxt.getText()));
+            res = stmt.executeQuery();
+                JOptionPane.showMessageDialog(this, "Datos Actualizados!", 
+                        "INFO", JOptionPane.INFORMATION_MESSAGE);
+        }catch(SQLException e){
+            e.getMessage();
+        }
+        CargarArticulo();
+      }
+    }//GEN-LAST:event_CajeroActualizarbtnActionPerformed
+
+    private void EliminarCajerobtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarCajerobtnActionPerformed
+        // TODO add your handling code here:
+        int opc = JOptionPane.showConfirmDialog(this, "¿ESTAS SEGURO QUE"
+                + " DESEA ELIMINAR ESTE CAJERO?", "INFO", 
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        if(opc == JOptionPane.YES_OPTION){
+        try{
+            PreparedStatement stmt = ClasesInternas.ConexionCashier.
+                getConexion().prepareStatement("DELETE FROM Vendedor "
+                        + "WHERE idvendedor = ?");
+            stmt.setInt(1, Integer.parseInt(CajeroIdtxt.getText()));
+            res = stmt.executeQuery();
+            JOptionPane.showMessageDialog(this, "Borrado exitoso!",
+                        "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        }catch(SQLException e){
+            e.getMessage();
+        }
+       CargarArticulo();
+      }
+    }//GEN-LAST:event_EliminarCajerobtnActionPerformed
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1MouseClicked
+
+    private void CajeroTablatblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CajeroTablatblMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = CajeroTablatbl.getSelectedRow();
+        DefaultTableModel modelo = (DefaultTableModel)CajeroTablatbl.getModel();
+        CajeroIdtxt.setText(modelo.getValueAt(selectedRow, 0).toString());
+        CajeroNombretxt.setText(modelo.getValueAt(selectedRow, 1).toString());
+        CajeroApellidotxt.setText(modelo.getValueAt(selectedRow, 2).toString());
+        CajeroCedulatxt.setText(modelo.getValueAt(selectedRow, 3).toString());
+        CajeroEmailtxt.setText(modelo.getValueAt(selectedRow, 4).toString());
+    }//GEN-LAST:event_CajeroTablatblMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CajeroActualizarbtn;
     private javax.swing.JLabel CajeroApellidolbl;
     private javax.swing.JTextField CajeroApellidotxt;
     private javax.swing.JLabel CajeroCedulalbl;
     private javax.swing.JTextField CajeroCedulatxt;
-    private javax.swing.JTextField CajeroContrasenatxt;
+    private javax.swing.JPasswordField CajeroContrasenatxt;
     private javax.swing.JTextField CajeroEmailtxt;
     private javax.swing.JLabel CajeroIdlbl;
     private javax.swing.JTextField CajeroIdtxt;

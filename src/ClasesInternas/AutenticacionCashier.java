@@ -19,7 +19,7 @@ public class AutenticacionCashier extends ConexionCashier{
         
         ClasesInternas.ConexionCashier.getConexion();
         try{
-            String consulta       = "SELECT * FROM Vendedor WHERE usuario = ? AND pass = ?";
+            String consulta       = "SELECT * FROM Vendedor WHERE email = ? AND pass = ?";
             PreparedStatement pst = getConexion().prepareStatement(consulta);
             pst.setString(1, user);
             pst.setString(2, pass);

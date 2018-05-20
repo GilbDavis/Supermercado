@@ -1,6 +1,7 @@
 package Main;
 
 import ClasesInternas.CreateCashier;
+import ClasesInternas.UpdateProducts;
 
 
 
@@ -96,6 +97,11 @@ public class AdminMenu extends javax.swing.JFrame {
         Stockbtn.setForeground(new java.awt.Color(0, 0, 14));
         Stockbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/stock.png"))); // NOI18N
         Stockbtn.setText("Stock");
+        Stockbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StockbtnActionPerformed(evt);
+            }
+        });
         jPanel1.add(Stockbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, -1, 40));
 
         Logolbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoSFW.PNG"))); // NOI18N
@@ -137,6 +143,13 @@ public class AdminMenu extends javax.swing.JFrame {
         this.desktop.add(cash);
         cash.setVisible(true);
     }//GEN-LAST:event_CajerobtnActionPerformed
+
+    private void StockbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StockbtnActionPerformed
+        // TODO add your handling code here:
+        UpdateProducts producto = new UpdateProducts();
+        this.desktop.add(producto);
+        producto.setVisible(true);
+    }//GEN-LAST:event_StockbtnActionPerformed
 
     /**
      * @param args the command line arguments

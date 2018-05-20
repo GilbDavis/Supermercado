@@ -153,7 +153,7 @@ public class AdminLogin extends javax.swing.JFrame {
         if(autenticacion.Autenticacion(mUser, mPassword) == true){
             AdminMenu adminmenu = new AdminMenu();
             adminmenu.setVisible(true);
-            JOptionPane.showMessageDialog(null, "Bienvenido" + mUser + "!",
+            JOptionPane.showMessageDialog(null, "Bienvenido " + mUser + "!",
                     "Felicidades", JOptionPane.INFORMATION_MESSAGE);
             AdminIdTXT.setText("");
             AdminPassJPF.setText("");
