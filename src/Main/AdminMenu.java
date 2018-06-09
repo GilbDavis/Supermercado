@@ -1,6 +1,7 @@
 package Main;
 
 import ClasesInternas.CreateCashier;
+import ClasesInternas.MostrarFactura;
 import ClasesInternas.UpdateProducts;
 
 
@@ -41,6 +42,8 @@ public class AdminMenu extends javax.swing.JFrame {
         Cajerobtn = new javax.swing.JButton();
         Salirbtn = new javax.swing.JButton();
         Stockbtn = new javax.swing.JButton();
+        Facturasbtn = new javax.swing.JButton();
+        CerrarSesionbtn = new javax.swing.JButton();
         Logolbl = new javax.swing.JLabel();
         ColoFondo = new javax.swing.JLabel();
 
@@ -104,6 +107,28 @@ public class AdminMenu extends javax.swing.JFrame {
         });
         jPanel1.add(Stockbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, -1, 40));
 
+        Facturasbtn.setBackground(new java.awt.Color(255, 197, 101));
+        Facturasbtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Facturasbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/receipt.png"))); // NOI18N
+        Facturasbtn.setText("Facturas");
+        Facturasbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FacturasbtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Facturasbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, 120, 40));
+
+        CerrarSesionbtn.setBackground(new java.awt.Color(255, 197, 101));
+        CerrarSesionbtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        CerrarSesionbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit_1.png"))); // NOI18N
+        CerrarSesionbtn.setText("Cerrar Sesión");
+        CerrarSesionbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CerrarSesionbtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(CerrarSesionbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 30, -1, 40));
+
         Logolbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoSFW.PNG"))); // NOI18N
         jPanel1.add(Logolbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
@@ -151,6 +176,21 @@ public class AdminMenu extends javax.swing.JFrame {
         producto.setVisible(true);
     }//GEN-LAST:event_StockbtnActionPerformed
 
+    private void CerrarSesionbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarSesionbtnActionPerformed
+        // TODO add your handling code here:
+        AdminLogin log = new AdminLogin();
+        dispose();
+        log.setVisible(true);
+        
+    }//GEN-LAST:event_CerrarSesionbtnActionPerformed
+
+    private void FacturasbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacturasbtnActionPerformed
+        // TODO add your handling code here:
+        MostrarFactura factura = new MostrarFactura();
+        this.desktop.add(factura);
+        factura.setVisible(true);
+    }//GEN-LAST:event_FacturasbtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -187,7 +227,9 @@ public class AdminMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cajerobtn;
+    private javax.swing.JButton CerrarSesionbtn;
     private javax.swing.JLabel ColoFondo;
+    private javax.swing.JButton Facturasbtn;
     private javax.swing.JLabel Logolbl;
     private javax.swing.JButton Salirbtn;
     private javax.swing.JButton Stockbtn;

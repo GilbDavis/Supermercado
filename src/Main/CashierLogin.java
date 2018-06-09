@@ -6,11 +6,6 @@
 package Main;
 
 import ClasesInternas.AutenticacionCashier;
-import ClasesInternas.ConexionCashier;
-import static ClasesInternas.ConexionCashier.getConexion;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,6 +21,10 @@ public class CashierLogin extends javax.swing.JFrame {
     
     public CashierLogin() {
         initComponents();
+        setLocationRelativeTo(null);
+        Regresarbtn.setOpaque(false);
+        Regresarbtn.setContentAreaFilled(false);
+        Regresarbtn.setBorderPainted(false);
     }
     
 
@@ -47,8 +46,10 @@ public class CashierLogin extends javax.swing.JFrame {
         CashierIdTXT = new javax.swing.JTextField();
         CashierLoginBTN = new javax.swing.JButton();
         CashierPassJPF = new javax.swing.JPasswordField();
+        Regresarbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -73,6 +74,13 @@ public class CashierLogin extends javax.swing.JFrame {
             }
         });
 
+        Regresarbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/left-arrow.png"))); // NOI18N
+        Regresarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegresarbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -80,7 +88,9 @@ public class CashierLogin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
+                        .addGap(7, 7, 7)
+                        .addComponent(Regresarbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(TituloLBL))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -108,19 +118,21 @@ public class CashierLogin extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TituloLBL)
-                .addGap(53, 53, 53)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TituloLBL)
+                    .addComponent(Regresarbtn))
+                .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CashierIMG)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(CashierIdLBL)
+                        .addComponent(CashierIdLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(CashierIdTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CashierPassLBL)
+                    .addComponent(CashierPassLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PassIMG)
-                    .addComponent(CashierPassJPF, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                    .addComponent(CashierPassJPF, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(CashierLoginBTN)
                 .addGap(43, 43, 43))
         );
@@ -172,6 +184,13 @@ public class CashierLogin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_CashierLoginBTNActionPerformed
 
+    private void RegresarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarbtnActionPerformed
+        // TODO add your handling code here:
+        VPrincipal principal = new VPrincipal();
+        dispose();
+        principal.setVisible(true);
+    }//GEN-LAST:event_RegresarbtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -215,6 +234,7 @@ public class CashierLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField CashierPassJPF;
     private javax.swing.JLabel CashierPassLBL;
     private javax.swing.JLabel PassIMG;
+    private javax.swing.JButton Regresarbtn;
     private javax.swing.JLabel TituloLBL;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

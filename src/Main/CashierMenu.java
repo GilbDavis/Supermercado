@@ -5,6 +5,8 @@
  */
 package Main;
 
+import ClasesInternas.NuevaFactura;
+
 /**
  *
  * @author Vivia Jones
@@ -31,10 +33,11 @@ public class CashierMenu extends javax.swing.JFrame {
         ProductSearchBTN = new javax.swing.JButton();
         NewBillBTN = new javax.swing.JButton();
         exitBTN = new javax.swing.JButton();
+        CerrarSesionbtn = new javax.swing.JButton();
         LogoLBL = new javax.swing.JLabel();
         ProductInfoBTN = new javax.swing.JButton();
         colorfondo = new javax.swing.JLabel();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        desktop = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -76,7 +79,18 @@ public class CashierMenu extends javax.swing.JFrame {
                 exitBTNActionPerformed(evt);
             }
         });
-        jPanel1.add(exitBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 30, -1, -1));
+        jPanel1.add(exitBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 30, -1, 40));
+
+        CerrarSesionbtn.setBackground(new java.awt.Color(255, 197, 101));
+        CerrarSesionbtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        CerrarSesionbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit_1.png"))); // NOI18N
+        CerrarSesionbtn.setText("Cerrar Sesión");
+        CerrarSesionbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CerrarSesionbtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(CerrarSesionbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 30, -1, 40));
 
         LogoLBL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoSFW.PNG"))); // NOI18N
         jPanel1.add(LogoLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, 200, 80));
@@ -97,14 +111,14 @@ public class CashierMenu extends javax.swing.JFrame {
         colorfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bk.jpg"))); // NOI18N
         jPanel1.add(colorfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 0, 1370, 100));
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
+        desktop.setLayout(desktopLayout);
+        desktopLayout.setHorizontalGroup(
+            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        desktopLayout.setVerticalGroup(
+            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 794, Short.MAX_VALUE)
         );
 
@@ -112,7 +126,7 @@ public class CashierMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(desktop)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
@@ -120,7 +134,7 @@ public class CashierMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -138,11 +152,21 @@ public class CashierMenu extends javax.swing.JFrame {
 
     private void NewBillBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewBillBTNActionPerformed
         // TODO add your handling code here:
+       NuevaFactura nuev = new NuevaFactura();
+       this.desktop.add(nuev);
+       nuev.setVisible(true);
     }//GEN-LAST:event_NewBillBTNActionPerformed
 
     private void ProductSearchBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductSearchBTNActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ProductSearchBTNActionPerformed
+
+    private void CerrarSesionbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarSesionbtnActionPerformed
+        // TODO add your handling code here:
+        CashierLogin log = new CashierLogin();
+        dispose();
+        log.setVisible(true);
+    }//GEN-LAST:event_CerrarSesionbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,13 +204,14 @@ public class CashierMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CerrarSesionbtn;
     private javax.swing.JLabel LogoLBL;
     private javax.swing.JButton NewBillBTN;
     private javax.swing.JButton ProductInfoBTN;
     private javax.swing.JButton ProductSearchBTN;
     private javax.swing.JLabel colorfondo;
+    private javax.swing.JDesktopPane desktop;
     private javax.swing.JButton exitBTN;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

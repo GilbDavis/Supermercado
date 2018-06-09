@@ -299,6 +299,8 @@ public class CreateCashier extends javax.swing.JInternalFrame {
                     while(res.next()){
                         cont = res.getInt(1);
                     }
+                stmt.close();
+                res.close();
                 }catch(SQLException e){
                     e.getMessage();
                 }
@@ -326,6 +328,8 @@ public class CreateCashier extends javax.swing.JInternalFrame {
                 stmt.setString(4, CajeroEmailtxt.getText());
                 stmt.setString(5, CajeroContrasenatxt.getText());
                 res = stmt.executeQuery();
+                stmt.close();
+                res.close();
                }catch(SQLException e){
                    e.getMessage();
                }
@@ -369,6 +373,8 @@ public class CreateCashier extends javax.swing.JInternalFrame {
             res = stmt.executeQuery();
                 JOptionPane.showMessageDialog(this, "Datos Actualizados!", 
                         "INFO", JOptionPane.INFORMATION_MESSAGE);
+            stmt.close();
+            res.close();
         }catch(SQLException e){
             e.getMessage();
         }
@@ -391,6 +397,8 @@ public class CreateCashier extends javax.swing.JInternalFrame {
             res = stmt.executeQuery();
             JOptionPane.showMessageDialog(this, "Borrado exitoso!",
                         "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+            stmt.close();
+            res.close();
         }catch(SQLException e){
             e.getMessage();
         }
