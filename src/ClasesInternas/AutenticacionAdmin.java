@@ -26,7 +26,6 @@ public class AutenticacionAdmin extends ConexionAdmin{
             pst.setString(1, user);
             pst.setString(2, pass);
             ResultSet rs          = pst.executeQuery();
-            
             if(rs.next()){
                 return true;
             }

@@ -41,7 +41,7 @@ public class ConexionCashier {
             contacto = DriverManager.getConnection(url, usuario, password);
             status = true;
         }catch (SQLException e){
-            JOptionPane.showMessageDialog(null, "Error" + e.getMessage(), "Error de conexion", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error de conexion", JOptionPane.ERROR_MESSAGE);
         }
         return contacto;
     }

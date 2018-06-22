@@ -6,6 +6,7 @@
 package ClasesInternas;
 
 import java.awt.GridLayout;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.Vector;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -36,6 +39,13 @@ public class NuevaFactura extends javax.swing.JInternalFrame {
         initComponents();
         NumeroFactura();
         ProductoCombo();
+        setLocation(200, 50);
+    }
+    
+    public NuevaFactura(String cEmail, String cPass){
+        initComponents();
+        ProductoCantidadtxt.setText(cEmail);
+        Totaltxt.setText(cPass);
     }
     
     //Este metodo me permite sumar automaticamente el precio de los productos y
@@ -99,9 +109,10 @@ public class NuevaFactura extends javax.swing.JInternalFrame {
         CajaTablatbl = new javax.swing.JTable();
         Totallbl = new javax.swing.JLabel();
         Totaltxt = new javax.swing.JTextField();
-        Imprimirbtn = new javax.swing.JButton();
+        Facturarbtn = new javax.swing.JButton();
         ProductoCombobx = new javax.swing.JComboBox<>();
         Eliminarbtn = new javax.swing.JButton();
+        Limpiarbtn = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -181,9 +192,14 @@ public class NuevaFactura extends javax.swing.JInternalFrame {
             }
         });
 
-        Imprimirbtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Imprimirbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cart.png"))); // NOI18N
-        Imprimirbtn.setText("Facturar");
+        Facturarbtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Facturarbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cart.png"))); // NOI18N
+        Facturarbtn.setText("Facturar");
+        Facturarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FacturarbtnActionPerformed(evt);
+            }
+        });
 
         ProductoCombobx.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ProductoCombobx.addActionListener(new java.awt.event.ActionListener() {
@@ -201,13 +217,24 @@ public class NuevaFactura extends javax.swing.JInternalFrame {
             }
         });
 
+        Limpiarbtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Limpiarbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eraser.png"))); // NOI18N
+        Limpiarbtn.setText("Limpiar");
+        Limpiarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Imprimirbtn)
+                .addGap(103, 103, 103)
+                .addComponent(Limpiarbtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Facturarbtn)
                 .addGap(216, 216, 216))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,13 +298,18 @@ public class NuevaFactura extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Añadirbtn)
                             .addComponent(Eliminarbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(Scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(Scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
                 .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Totallbl)
                     .addComponent(Totaltxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(Imprimirbtn)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(Facturarbtn))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Limpiarbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32))
         );
 
@@ -375,13 +407,137 @@ public class NuevaFactura extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_EliminarbtnActionPerformed
 
+    private void FacturarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacturarbtnActionPerformed
+        // TODO add your handling code here:
+        
+        final JComboBox box = new JComboBox();
+        final JComboBox corr = new JComboBox();
+        panel = new JPanel(new GridLayout(2, 2));
+        
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Imagenes/invoice.png"));
+        panel.add(new JLabel("Vendedor: "));
+        panel.add(corr);
+        panel.add(Box.createHorizontalBox());
+        panel.add(new JLabel("Metodo de Pago:"));
+        panel.add(box);
+        //Este try se encarga de rellenar los combobox con datos de la Base de datos
+        try{
+            try{
+                PreparedStatement stmt = ClasesInternas
+                    .ConexionCashier.getConexion()
+                    .prepareStatement("SELECT * FROM Vendedor");
+            ResultSet res = stmt.executeQuery();
+            while(res.next()){
+                corr.addItem(res.getString("email"));
+            }
+            }catch(SQLException e){
+                e.getMessage();
+            }
+            
+            try{
+                PreparedStatement stmt = ClasesInternas
+                    .ConexionCashier.getConexion()
+                    .prepareStatement("SELECT * FROM ModoPago");
+                ResultSet res = stmt.executeQuery();
+                while(res.next()){
+                    box.addItem(res.getString("nombre") + "-" +
+                            res.getString("descripcion"));
+                }
+            }catch(SQLException e){
+                e.getMessage();
+            }
+        }catch(Exception e){
+            e.getMessage();
+        }
+        //Aqui finaliza el try para los ComboBox
+            
+        //Inicializa el JPanel perzonalizado para seleccionar el metodo de pago y vendedor que realiza la factura
+        int resultado = JOptionPane.showConfirmDialog(this, panel,
+                "Facturación", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
+        
+        if(resultado == JOptionPane.OK_OPTION){
+            try{
+                //Pedir el id del vendedor segun su Correo
+                PreparedStatement stmt1 = ClasesInternas
+                        .ConexionCashier
+                        .getConexion().prepareStatement("SELECT idvendedor FROM Vendedor WHERE email = ?");
+                String uCorreo = (String) corr.getSelectedItem();
+                stmt1.setString(1, uCorreo);
+                ResultSet res1 = stmt1.executeQuery();
+                String uIdvend = "";
+                if(res1.next()){
+                    uIdvend = res1.getString("idvendedor");
+                }
+                stmt1.close();
+                res1.close();
+                //Finalizacion de la consulta correo
+                
+                //Inserta los valores de la tabla y combobox al finalizar la transaccion
+                int columnas = CajaTablatbl.getRowCount();
+                Connection conn = ClasesInternas.ConexionCashier.getConexion();
+                conn.setAutoCommit(false);
+                PreparedStatement stmt = conn
+                        .prepareStatement("INSERT INTO Factura(idproducto,"
+                                + " idpago, idvendedor, cantidad, precio)"
+                                + " VALUES (?, ?, ?, ?, ?);");
+                for(int i = 0; i < columnas; i++){
+                    int idprod = Integer.parseInt(CajaTablatbl.getValueAt(i, 0).toString());
+                    int cantid = Integer.parseInt(CajaTablatbl.getValueAt(i, 1).toString());
+                    float preci = Float.parseFloat(CajaTablatbl.getValueAt(i, 3).toString());
+                    
+                    int idpag = box.getSelectedIndex() + 1;
+                    stmt.setInt(1, idprod);
+                    stmt.setString(2, Integer.toString(idpag));
+                    stmt.setString(3, uIdvend);
+                    stmt.setInt(4, cantid);
+                    stmt.setFloat(5, preci);
+                    
+                    stmt.addBatch();
+                }
+                
+                stmt.executeBatch();
+                conn.commit();
+                stmt.close();
+                conn.close();
+                //Aqui finaliza el codigo de la insercion de facturacion
+                
+                //Este pedazo de codigo es para restarle la cantidad de productos vendidos a la Base de Datos
+                PreparedStatement stmtcan = ClasesInternas
+                        .ConexionCashier.getConexion()
+                        .prepareStatement("UPDATE Producto SET "
+                                + "stock = stock - ? WHERE idproducto = ?");
+                for(int i = 0; i < columnas; i++){
+                    int cCantidad = Integer.parseInt(CajaTablatbl.getValueAt(i, 1).toString());
+                    int cIdprod = Integer.parseInt(CajaTablatbl.getValueAt(i, 0).toString());
+                    
+                    stmtcan.setInt(1, cCantidad);
+                    stmtcan.setInt(2, cIdprod);
+                    
+                    stmtcan.addBatch();
+                }
+                
+                stmtcan.executeBatch();
+                stmtcan.close();
+            }catch(SQLException e){
+                e.getMessage();
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Transaccion Finalizada!", "Transacción", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_FacturarbtnActionPerformed
+
+    private void LimpiarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarbtnActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_LimpiarbtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Añadirbtn;
     private javax.swing.JTable CajaTablatbl;
     private javax.swing.JButton Eliminarbtn;
     private javax.swing.JTextField FacturaNumerotxt;
-    private javax.swing.JButton Imprimirbtn;
+    private javax.swing.JButton Facturarbtn;
+    private javax.swing.JButton Limpiarbtn;
     private javax.swing.JLabel NumeroFacturalbl;
     private javax.swing.JLabel ProductoCantidadlbl;
     private javax.swing.JTextField ProductoCantidadtxt;

@@ -6,6 +6,7 @@
 package Main;
 
 import ClasesInternas.AutenticacionCashier;
+import ClasesInternas.NuevaFactura;
 import javax.swing.JOptionPane;
 
 /**
@@ -47,26 +48,37 @@ public class CashierLogin extends javax.swing.JFrame {
         CashierLoginBTN = new javax.swing.JButton();
         CashierPassJPF = new javax.swing.JPasswordField();
         Regresarbtn = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(32, 33, 35));
 
         TituloLBL.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        TituloLBL.setText("Inicio de Sesion Cashier");
+        TituloLBL.setForeground(new java.awt.Color(57, 113, 177));
+        TituloLBL.setText("Login Cajero");
 
         CashierIdLBL.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        CashierIdLBL.setForeground(new java.awt.Color(57, 113, 177));
         CashierIdLBL.setText("CashierID:");
 
         CashierPassLBL.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        CashierPassLBL.setForeground(new java.awt.Color(57, 113, 177));
         CashierPassLBL.setText("Password:");
 
         CashierIMG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/an.png"))); // NOI18N
 
         PassIMG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clave.png"))); // NOI18N
 
-        CashierLoginBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/login (1).png"))); // NOI18N
+        CashierIdTXT.setBackground(new java.awt.Color(32, 33, 35));
+        CashierIdTXT.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        CashierIdTXT.setForeground(new java.awt.Color(255, 255, 255));
+        CashierIdTXT.setBorder(null);
+
+        CashierLoginBTN.setBackground(new java.awt.Color(126, 87, 194));
+        CashierLoginBTN.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         CashierLoginBTN.setText("LOGIN");
         CashierLoginBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,7 +86,15 @@ public class CashierLogin extends javax.swing.JFrame {
             }
         });
 
-        Regresarbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/left-arrow.png"))); // NOI18N
+        CashierPassJPF.setBackground(new java.awt.Color(32, 33, 35));
+        CashierPassJPF.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        CashierPassJPF.setForeground(new java.awt.Color(255, 255, 255));
+        CashierPassJPF.setBorder(null);
+
+        Regresarbtn.setBackground(new java.awt.Color(32, 33, 35));
+        Regresarbtn.setForeground(new java.awt.Color(32, 33, 35));
+        Regresarbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/left-arrow_1.png"))); // NOI18N
+        Regresarbtn.setBorder(null);
         Regresarbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RegresarbtnActionPerformed(evt);
@@ -88,53 +108,58 @@ public class CashierLogin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
+                        .addContainerGap()
                         .addComponent(Regresarbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(64, 64, 64)
                         .addComponent(TituloLBL))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
                                 .addComponent(CashierIMG)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CashierIdLBL))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(CashierIdLBL)
+                                    .addComponent(CashierIdTXT, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                    .addComponent(jSeparator1)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(PassIMG)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CashierPassLBL)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(CashierIdTXT)
-                            .addComponent(CashierPassJPF, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))))
-                .addContainerGap(49, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(CashierLoginBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(149, 149, 149))
+                                .addComponent(CashierPassLBL))
+                            .addComponent(CashierPassJPF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(CashierLoginBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(TituloLBL)
                     .addComponent(Regresarbtn))
-                .addGap(49, 49, 49)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(62, 62, 62)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(CashierIMG)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(CashierIdLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(CashierIdTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CashierIdLBL))
+                .addGap(11, 11, 11)
+                .addComponent(CashierIdTXT, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CashierPassLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PassIMG)
-                    .addComponent(CashierPassJPF, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(CashierLoginBTN)
-                .addGap(43, 43, 43))
+                    .addComponent(PassIMG))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(CashierPassJPF, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(CashierLoginBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -237,5 +262,7 @@ public class CashierLogin extends javax.swing.JFrame {
     private javax.swing.JButton Regresarbtn;
     private javax.swing.JLabel TituloLBL;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
 }

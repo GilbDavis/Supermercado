@@ -40,35 +40,35 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="Fechalbl" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="Idlbl" min="-2" max="-2" attributes="0"/>
                                       <Component id="Cedulalbl" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="Idlbl" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="FacturaIdtxt" min="-2" pref="82" max="-2" attributes="0"/>
+                                      <Component id="Cedulatxt" min="-2" pref="134" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Buscarbtn" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="FacturaIdtxt" min="-2" pref="82" max="-2" attributes="0"/>
-                              <Component id="Cedulatxt" pref="134" max="32767" attributes="0"/>
-                              <Component id="Buscarbtn" min="-2" max="-2" attributes="0"/>
-                              <Component id="DatePicker" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="601" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" pref="676" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="402" max="-2" attributes="0"/>
                           <Component id="Titulolbl" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="29" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -83,26 +83,21 @@
                           <Component id="jScrollPane1" min="-2" pref="393" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="Idlbl" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="FacturaIdtxt" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="Cedulatxt" pref="31" max="32767" attributes="0"/>
-                              <Component id="Cedulalbl" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="Cedulatxt" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="Cedulalbl" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="Fechalbl" pref="29" max="32767" attributes="0"/>
-                              <Component id="DatePicker" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                           <Component id="Buscarbtn" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="43" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -136,14 +131,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="Cedulatxt">
         </Component>
-        <Component class="javax.swing.JLabel" name="Fechalbl">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="16" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Fecha Factura"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="Buscarbtn">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -169,9 +156,9 @@
                     <Column editable="false" title="IdFactura" type="java.lang.Integer"/>
                     <Column editable="false" title="Vendedor" type="java.lang.String"/>
                     <Column editable="false" title="Cedula" type="java.lang.String"/>
-                    <Column editable="false" title="Fecha_Factura" type="java.lang.String"/>
+                    <Column editable="false" title="Fecha" type="java.lang.String"/>
+                    <Column editable="false" title="Producto" type="java.lang.String"/>
                     <Column editable="false" title="Cantidad" type="java.lang.Integer"/>
-                    <Column editable="false" title="Nombre_Producto" type="java.lang.String"/>
                     <Column editable="false" title="Total" type="java.lang.Float"/>
                     <Column editable="false" title="ModoPago" type="java.lang.String"/>
                   </Table>
@@ -227,8 +214,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="org.jdesktop.swingx.JXDatePicker" name="DatePicker">
-        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

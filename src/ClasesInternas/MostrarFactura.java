@@ -5,11 +5,14 @@
  */
 package ClasesInternas;
 
-import static ClasesInternas.CreateCashier.res;
-import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,14 +26,37 @@ public class MostrarFactura extends javax.swing.JInternalFrame {
      */
     public MostrarFactura() {
         initComponents();
-        CargarArticulo();
         setLocation(200, 50);
-        Date();
     }
-    
-    public void Date(){
-        String date =DatePicker.getDate().toString();
-        Cedulatxt.setText(date);
+    //No esta siendo utilizada pero sirve para rellenar la tabla con toda la informacion de la base de datos por defecto
+    public void CargarData(){
+        try{
+            DefaultTableModel modelo = (DefaultTableModel) Facturatbl.getModel();
+            modelo.setRowCount(0);
+            PreparedStatement stmt = ClasesInternas.ConexionAdmin.getConexion().
+                prepareStatement("SELECT Factura.idfactura AS [IdFactura], Vendedor.nombre AS Vendedor, Vendedor.cedula AS Cedula,\n" +
+                    " Factura.fecha AS [Fecha Factura] , \n" +
+                    "Producto.nombre AS Nombre_Producto, Factura.cantidad, (Factura.precio * Factura.cantidad) AS Total, (ModoPago.nombre + ' - ' + ModoPago.descripcion) AS [Modo_Pago] FROM Factura\n" +
+                    "INNER JOIN Producto ON Factura.idproducto = Producto.idproducto\n" +
+                    "INNER JOIN ModoPago ON ModoPago.idpago = Factura.idpago\n" +
+                    "INNER JOIN Vendedor ON Vendedor.idvendedor = Factura.idvendedor");
+            ResultSet res = stmt.executeQuery();
+            Vector v = new Vector();
+            while(res.next()){
+                v.add(res.getInt(1));
+                v.add(res.getString(2));
+                v.add(res.getString(3));
+                v.add(res.getString(4));
+                v.add(res.getString(5));
+                v.add(res.getInt(6));
+                v.add(res.getFloat(7));
+                v.add(res.getString(8));
+                modelo.addRow(v);
+                Facturatbl.setModel(modelo);
+            }
+        }catch(SQLException e){
+            e.getMessage();
+        }
     }
     
     public void CargarArticulo(){
@@ -38,36 +64,26 @@ public class MostrarFactura extends javax.swing.JInternalFrame {
         modelo.setRowCount(0);
         try{
             PreparedStatement stmt = ClasesInternas.ConexionAdmin.getConexion().
-                prepareStatement("SELECT Factura.idfactura AS [IdFactura],"
-                        + " Vendedor.nombre AS Vendedor, Vendedor.cedula AS"
-                        + " Cedula, " +
-                        " Factura.fecha AS [Fecha Factura] ,Detalle.cantidad, " +
-                        "Producto.nombre AS Nombre_Producto, "
-                        + "dbo.Total(Detalle.precio, Detalle.cantidad) AS Total," +
-                        "(ModoPago.nombre + ' - ' + ModoPago.descripcion) AS"
-                        + " [Modo_Pago] FROM Factura" +
-                        "INNER JOIN Detalle ON Factura.idfactura = Detalle.idfactura" +
-                        "INNER JOIN Producto ON Detalle.idproducto = Producto.idproducto" +
-                        "INNER JOIN ModoPago ON ModoPago.idpago = Factura.idpago" +
-                        "INNER JOIN Vendedor ON Vendedor.idvendedor = Factura.idvendedor" +
-                        "WHERE Factura.idfactura = ? OR Vendedor.cedula = ? OR Factura.fecha = ?" +
-                        "GROUP BY Factura.idfactura, Vendedor.nombre,"
-                        + " Vendedor.cedula, Factura.fecha, Detalle.cantidad,"
-                        + " Producto.nombre, " +
-                        "Detalle.precio, ModoPago.nombre, ModoPago.descripcion;");
+                prepareStatement("SELECT Factura.idfactura AS [IdFactura], Vendedor.nombre AS Vendedor, Vendedor.cedula AS Cedula,\n" +
+                    " Factura.fecha AS [Fecha Factura] , \n" +
+                    "Producto.nombre AS Nombre_Producto, Factura.cantidad, (Factura.precio * Factura.cantidad) AS Total, (ModoPago.nombre + ' - ' + ModoPago.descripcion) AS [Modo_Pago] FROM Factura\n" +
+                    "INNER JOIN Producto ON Factura.idproducto = Producto.idproducto\n" +
+                    "INNER JOIN ModoPago ON ModoPago.idpago = Factura.idpago\n" +
+                    "INNER JOIN Vendedor ON Vendedor.idvendedor = Factura.idvendedor\n" +
+                    "WHERE Factura.idfactura = ? AND Vendedor.cedula = ?");
             stmt.setString(1, FacturaIdtxt.getText());
             stmt.setString(2, Cedulatxt.getText());
-            stmt.setDate(3, (Date) DatePicker.getDate());
-            res = stmt.executeQuery();
-            while(res.next()){
-             Vector v = new Vector();
-                v.add(res.getInt(1));
-                v.add(res.getString(2));
-                v.add(res.getString(3));
-                v.add(res.getString(4));
-                v.add(res.getString(5));
-                v.add(res.getFloat(6));
-                v.add(res.getString(7));
+            ResultSet resul = stmt.executeQuery();
+            Vector v = new Vector();
+            while(resul.next()){
+                v.add(resul.getInt(1));
+                v.add(resul.getString(2));
+                v.add(resul.getString(3));
+                v.add(resul.getString(4));
+                v.add(resul.getString(5));
+                v.add(resul.getInt(6));
+                v.add(resul.getFloat(7));
+                v.add(resul.getString(8));
                 modelo.addRow(v);
                 Facturatbl.setModel(modelo);
             }
@@ -86,11 +102,9 @@ public class MostrarFactura extends javax.swing.JInternalFrame {
         FacturaIdtxt = new javax.swing.JTextField();
         Cedulalbl = new javax.swing.JLabel();
         Cedulatxt = new javax.swing.JTextField();
-        Fechalbl = new javax.swing.JLabel();
         Buscarbtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Facturatbl = new javax.swing.JTable();
-        DatePicker = new org.jdesktop.swingx.JXDatePicker();
 
         setClosable(true);
 
@@ -102,9 +116,6 @@ public class MostrarFactura extends javax.swing.JInternalFrame {
 
         Cedulalbl.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         Cedulalbl.setText("Vendedor Cedula:");
-
-        Fechalbl.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        Fechalbl.setText("Fecha Factura");
 
         Buscarbtn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         Buscarbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/search-32.png"))); // NOI18N
@@ -123,11 +134,11 @@ public class MostrarFactura extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "IdFactura", "Vendedor", "Cedula", "Fecha_Factura", "Cantidad", "Nombre_Producto", "Total", "ModoPago"
+                "IdFactura", "Vendedor", "Cedula", "Fecha", "Producto", "Cantidad", "Total", "ModoPago"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
@@ -150,27 +161,27 @@ public class MostrarFactura extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Fechalbl)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(60, 60, 60)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Idlbl)
                                     .addComponent(Cedulalbl))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(Idlbl))))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(FacturaIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Cedulatxt, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                            .addComponent(Buscarbtn)
-                            .addComponent(DatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(FacturaIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Cedulatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(Buscarbtn)
+                                .addGap(110, 110, 110)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(402, 402, 402)
-                        .addComponent(Titulolbl)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addComponent(Titulolbl)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,21 +193,17 @@ public class MostrarFactura extends javax.swing.JInternalFrame {
                         .addGap(37, 37, 37)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
+                        .addGap(177, 177, 177)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Idlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(FacturaIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Cedulatxt, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                            .addComponent(Cedulalbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Fechalbl, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                            .addComponent(DatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(50, 50, 50)
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Cedulatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Cedulalbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58)
                         .addComponent(Buscarbtn)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -223,10 +230,8 @@ public class MostrarFactura extends javax.swing.JInternalFrame {
     private javax.swing.JButton Buscarbtn;
     private javax.swing.JLabel Cedulalbl;
     private javax.swing.JTextField Cedulatxt;
-    private org.jdesktop.swingx.JXDatePicker DatePicker;
     private javax.swing.JTextField FacturaIdtxt;
     private javax.swing.JTable Facturatbl;
-    private javax.swing.JLabel Fechalbl;
     private javax.swing.JLabel Idlbl;
     private javax.swing.JLabel Titulolbl;
     private javax.swing.JPanel jPanel1;

@@ -5,6 +5,8 @@
  */
 package Main;
 
+import ClasesInternas.InformacionProducto;
+import ClasesInternas.MostrarFactura;
 import ClasesInternas.NuevaFactura;
 
 /**
@@ -148,6 +150,9 @@ public class CashierMenu extends javax.swing.JFrame {
 
     private void ProductInfoBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductInfoBTNActionPerformed
         // TODO add your handling code here:
+        InformacionProducto prod = new InformacionProducto();
+        this.desktop.add(prod);
+        prod.setVisible(true);
     }//GEN-LAST:event_ProductInfoBTNActionPerformed
 
     private void NewBillBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewBillBTNActionPerformed
@@ -159,6 +164,9 @@ public class CashierMenu extends javax.swing.JFrame {
 
     private void ProductSearchBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductSearchBTNActionPerformed
         // TODO add your handling code here:
+        MostrarFactura factura = new MostrarFactura();
+        this.desktop.add(factura);
+        factura.setVisible(true);
     }//GEN-LAST:event_ProductSearchBTNActionPerformed
 
     private void CerrarSesionbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarSesionbtnActionPerformed
