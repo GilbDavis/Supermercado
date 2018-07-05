@@ -21,6 +21,7 @@ public class InformacionProducto extends javax.swing.JInternalFrame {
      * Creates new form InformacionProducto
      */
     public InformacionProducto() {
+        setLocation(200, 50);
         initComponents();
     }
 

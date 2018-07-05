@@ -5,13 +5,17 @@
  */
 package ClasesInternas;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.GridLayout;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.TreeMap;
+import java.text.MessageFormat;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Vector;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -521,8 +525,23 @@ public class NuevaFactura extends javax.swing.JInternalFrame {
             }catch(SQLException e){
                 e.getMessage();
             }
+            
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date date = new Date();
+          
+            MessageFormat header = new MessageFormat("Factura Supermercados Romero");
+            MessageFormat footer = new MessageFormat("Por ti hacemos lo que hacemos");
+            
+            try{
+                CajaTablatbl.print(JTable.PrintMode.FIT_WIDTH, header, footer); 
+            }catch(PrinterException e){
+                System.err.format("No se puede imprimir ", e.getMessage());
+            }
+            
+            JOptionPane.showMessageDialog(this, "Transaccion Finalizada!", "Transacción", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this, "Transaccion cancelada!", "Transacción", JOptionPane.INFORMATION_MESSAGE);
         }
-        JOptionPane.showMessageDialog(this, "Transaccion Finalizada!", "Transacción", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_FacturarbtnActionPerformed
 
     private void LimpiarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarbtnActionPerformed
