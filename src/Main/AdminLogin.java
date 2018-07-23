@@ -6,6 +6,7 @@
 package Main;
 
 import ClasesInternas.AutenticacionAdmin;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +20,8 @@ public class AdminLogin extends javax.swing.JFrame {
      */
     public AdminLogin() {
         initComponents();
+        setTitle("Inicio de Sesión");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icon.png")));
         setLocationRelativeTo(null);
         Regresarbtn.setOpaque(false);
         Regresarbtn.setContentAreaFilled(false);

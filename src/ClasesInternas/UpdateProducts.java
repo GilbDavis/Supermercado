@@ -25,6 +25,7 @@ public class UpdateProducts extends javax.swing.JInternalFrame {
      */
     public UpdateProducts() {
         initComponents();
+        setTitle("Administración de Productos");
         setLocation(200, 50);
         ComboRefrescar();
         CargarArticulo();
@@ -101,11 +102,12 @@ public class UpdateProducts extends javax.swing.JInternalFrame {
         ProductoTablatbl = new javax.swing.JTable();
         ProductoNuevobtn = new javax.swing.JButton();
         ProductoActualizarbtn = new javax.swing.JButton();
+        Eliminarbtn = new javax.swing.JButton();
 
         setClosable(true);
 
-        Titulolbl.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        Titulolbl.setText("Actualizar Productos");
+        Titulolbl.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        Titulolbl.setText("Administración de Productos");
 
         ProductoIdlbl.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         ProductoIdlbl.setText("Producto Id");
@@ -180,6 +182,15 @@ public class UpdateProducts extends javax.swing.JInternalFrame {
             }
         });
 
+        Eliminarbtn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        Eliminarbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/del.png"))); // NOI18N
+        Eliminarbtn.setText("Eliminar");
+        Eliminarbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -194,22 +205,32 @@ public class UpdateProducts extends javax.swing.JInternalFrame {
                             .addComponent(ProductoPreciolbl)
                             .addComponent(ProductoStocklbl)
                             .addComponent(ProductoCategorialbl)
-                            .addComponent(ProductoNuevobtn, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ProductoIdtxt)
-                            .addComponent(ProductoNombretxt)
-                            .addComponent(ProductoPreciotxt)
-                            .addComponent(ProductoStocktxt)
-                            .addComponent(ProductoCategoriacmbx, 0, 168, Short.MAX_VALUE)
-                            .addComponent(ProductoActualizarbtn))
-                        .addGap(18, 18, 18))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(ProductoNuevobtn)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ProductoIdtxt)
+                                    .addComponent(ProductoNombretxt)
+                                    .addComponent(ProductoPreciotxt)
+                                    .addComponent(ProductoStocktxt)
+                                    .addComponent(ProductoCategoriacmbx, 0, 168, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(ProductoActualizarbtn)))
+                        .addGap(35, 35, 35))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(Titulolbl)
-                        .addGap(75, 75, 75)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                        .addGap(27, 27, 27)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(Eliminarbtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,12 +259,14 @@ public class UpdateProducts extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ProductoCategorialbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ProductoCategoriacmbx, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ProductoNuevobtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ProductoActualizarbtn))
-                .addGap(47, 47, 47))
+                            .addComponent(ProductoCategoriacmbx, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ProductoNuevobtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ProductoActualizarbtn))
+                        .addGap(18, 18, 18)
+                        .addComponent(Eliminarbtn)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -336,8 +359,38 @@ public class UpdateProducts extends javax.swing.JInternalFrame {
         ProductoStocktxt.setText(modelo.getValueAt(selectedRow, 3).toString());
     }//GEN-LAST:event_ProductoTablatblMouseClicked
 
+    private void EliminarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarbtnActionPerformed
+        // TODO add your handling code here:
+        int opc = JOptionPane.showConfirmDialog(this, "¿ESTA SEGURO QUE DESEA "
+                + "ELIMINAR EL PRODUCTO?", "INFO", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if(opc == JOptionPane.YES_OPTION){
+            
+            try{
+                
+                PreparedStatement stmt = ClasesInternas.ConexionAdmin
+                        .getConexion()
+                        .prepareStatement("DELETE FROM Producto WHERE idproducto = ?");
+                
+                stmt.setInt(1, Integer.parseInt(ProductoIdtxt.getText()));
+                
+                stmt.executeUpdate();
+                
+                JOptionPane.showMessageDialog(this, "Producto Eliminado!", "INFO", JOptionPane.INFORMATION_MESSAGE);
+                
+                CargarArticulo();
+            }catch(SQLException e){
+                System.out.println(e.getMessage());
+            }
+            
+        }else{
+            
+        }
+    }//GEN-LAST:event_EliminarbtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Eliminarbtn;
     private javax.swing.JButton ProductoActualizarbtn;
     private javax.swing.JComboBox<String> ProductoCategoriacmbx;
     private javax.swing.JLabel ProductoCategorialbl;

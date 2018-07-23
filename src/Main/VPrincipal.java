@@ -5,6 +5,8 @@
  */
 package Main;
 
+import java.awt.Toolkit;
+
 /**
  *
  * @author Vivia Jones
@@ -17,6 +19,8 @@ public class VPrincipal extends javax.swing.JFrame {
     public VPrincipal() {
         setLocationRelativeTo(null);
         initComponents();
+        setTitle("Inicio");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icon.png")));
     }
 
     /**

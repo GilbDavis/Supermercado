@@ -26,6 +26,7 @@ public class CreateCashier extends javax.swing.JInternalFrame {
      */
     public CreateCashier() {
         initComponents();
+        setTitle("Administración de cajeros");
         setLocation(200, 50);
         CargarArticulo();
     }

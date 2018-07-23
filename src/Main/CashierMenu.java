@@ -8,6 +8,7 @@ package Main;
 import ClasesInternas.InformacionProducto;
 import ClasesInternas.MostrarFactura;
 import ClasesInternas.NuevaFactura;
+import java.awt.Toolkit;
 
 /**
  *
@@ -20,6 +21,8 @@ public class CashierMenu extends javax.swing.JFrame {
      */
     public CashierMenu() {
         initComponents();
+        setTitle("Menu del Cajero");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icon.png")));
     }
 
     /**

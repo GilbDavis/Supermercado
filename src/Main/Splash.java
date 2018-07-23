@@ -14,7 +14,7 @@ public class Splash {
     public static void main(String[] args){
         SplashScreen spl = new SplashScreen();
         VPrincipal prin = new VPrincipal();
-            spl.setLocationRelativeTo(null);
+        spl.setLocationRelativeTo(null);
         spl.setVisible(true);
         try{
             for(int i = 0; i <= 100; i++){

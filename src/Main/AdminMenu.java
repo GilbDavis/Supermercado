@@ -3,6 +3,7 @@ package Main;
 import ClasesInternas.CreateCashier;
 import ClasesInternas.MostrarFactura;
 import ClasesInternas.UpdateProducts;
+import java.awt.Toolkit;
 
 
 
@@ -23,6 +24,8 @@ public class AdminMenu extends javax.swing.JFrame {
      */
     public AdminMenu() {
         initComponents();
+        setTitle("Menu de Administrador");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icon.png")));
     }
 
     /**

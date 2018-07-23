@@ -26,6 +26,7 @@ public class MostrarFactura extends javax.swing.JInternalFrame {
      */
     public MostrarFactura() {
         initComponents();
+        setTitle("Facturas");
         setLocation(200, 50);
     }
     //No esta siendo utilizada pero sirve para rellenar la tabla con toda la informacion de la base de datos por defecto

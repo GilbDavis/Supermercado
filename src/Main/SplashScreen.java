@@ -5,6 +5,8 @@
  */
 package Main;
 
+import java.awt.Toolkit;
+
 /**
  *
  * @author Vivia Jones
@@ -16,6 +18,7 @@ public class SplashScreen extends javax.swing.JFrame {
      */
     public SplashScreen() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icon.png")));
     }
 
     /**

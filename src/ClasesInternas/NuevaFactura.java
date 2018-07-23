@@ -41,6 +41,7 @@ public class NuevaFactura extends javax.swing.JInternalFrame {
      */
     public NuevaFactura() {
         initComponents();
+        setTitle("Cajero");
         NumeroFactura();
         ProductoCombo();
         setLocation(200, 50);
@@ -116,7 +117,6 @@ public class NuevaFactura extends javax.swing.JInternalFrame {
         Facturarbtn = new javax.swing.JButton();
         ProductoCombobx = new javax.swing.JComboBox<>();
         Eliminarbtn = new javax.swing.JButton();
-        Limpiarbtn = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -221,23 +221,12 @@ public class NuevaFactura extends javax.swing.JInternalFrame {
             }
         });
 
-        Limpiarbtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Limpiarbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eraser.png"))); // NOI18N
-        Limpiarbtn.setText("Limpiar");
-        Limpiarbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LimpiarbtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(103, 103, 103)
-                .addComponent(Limpiarbtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(103, 517, Short.MAX_VALUE)
                 .addComponent(Facturarbtn)
                 .addGap(216, 216, 216))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -302,18 +291,13 @@ public class NuevaFactura extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Añadirbtn)
                             .addComponent(Eliminarbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(Scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
+                    .addComponent(Scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
                 .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Totallbl)
                     .addComponent(Totaltxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(Facturarbtn))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Limpiarbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addComponent(Facturarbtn)
                 .addGap(32, 32, 32))
         );
 
@@ -413,6 +397,7 @@ public class NuevaFactura extends javax.swing.JInternalFrame {
 
     private void FacturarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacturarbtnActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) CajaTablatbl.getModel();
         
         final JComboBox box = new JComboBox();
         final JComboBox corr = new JComboBox();
@@ -538,16 +523,15 @@ public class NuevaFactura extends javax.swing.JInternalFrame {
                 System.err.format("No se puede imprimir ", e.getMessage());
             }
             
+            model.setRowCount(0);
+            model.fireTableDataChanged();
+            Totaltxt.setText("$");
+            NumeroFactura();
             JOptionPane.showMessageDialog(this, "Transaccion Finalizada!", "Transacción", JOptionPane.INFORMATION_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(this, "Transaccion cancelada!", "Transacción", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_FacturarbtnActionPerformed
-
-    private void LimpiarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarbtnActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_LimpiarbtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -556,7 +540,6 @@ public class NuevaFactura extends javax.swing.JInternalFrame {
     private javax.swing.JButton Eliminarbtn;
     private javax.swing.JTextField FacturaNumerotxt;
     private javax.swing.JButton Facturarbtn;
-    private javax.swing.JButton Limpiarbtn;
     private javax.swing.JLabel NumeroFacturalbl;
     private javax.swing.JLabel ProductoCantidadlbl;
     private javax.swing.JTextField ProductoCantidadtxt;

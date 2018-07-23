@@ -7,6 +7,7 @@ package Main;
 
 import ClasesInternas.AutenticacionCashier;
 import ClasesInternas.NuevaFactura;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +23,8 @@ public class CashierLogin extends javax.swing.JFrame {
     
     public CashierLogin() {
         initComponents();
+        setTitle("Inicio de Sesión");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icon.png")));
         setLocationRelativeTo(null);
         Regresarbtn.setOpaque(false);
         Regresarbtn.setContentAreaFilled(false);
@@ -62,7 +65,7 @@ public class CashierLogin extends javax.swing.JFrame {
 
         CashierIdLBL.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         CashierIdLBL.setForeground(new java.awt.Color(57, 113, 177));
-        CashierIdLBL.setText("CashierID:");
+        CashierIdLBL.setText("Correo:");
 
         CashierPassLBL.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         CashierPassLBL.setForeground(new java.awt.Color(57, 113, 177));
